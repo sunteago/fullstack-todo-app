@@ -1,12 +1,15 @@
 const express = require('express');
 const sequelize = require('./config/db');
 
+const todosRoutes = require('./routes/todos');
+
 const PORT = 4000;
 
 const app = express();
 
 app.use(express.json());
 
+app.use('/todos', todosRoutes);
 
 sequelize
   .sync()
