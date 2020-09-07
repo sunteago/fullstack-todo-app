@@ -21,6 +21,9 @@ export default function Todo(): JSX.Element {
             <li key={todo.uuid}>
               <p>{todo.task}</p>
               <span>{todo.done ? "done" : "not done"} </span>
+              <span onClick={() => dispatch(actions.deleteTodoItem(todo.uuid))}>
+                Delete &times;
+              </span>
             </li>
           ))}
         </ul>

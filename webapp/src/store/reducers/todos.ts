@@ -12,31 +12,25 @@ const initialState: ITodosState = {
 
 export default (state: ITodosState = initialState, action: TodosTypes) => {
   switch (action.type) {
-    case actionTypes.CREATE_TODO_ITEM_START:
-      return {
-        ...state,
-      };
-    case actionTypes.CREATE_TODO_ITEM_SUCCESS:
-      return {
-        ...state,
-      };
-    case actionTypes.CREATE_TODO_ITEM_FAILED:
-      return {
-        ...state,
-      };
-    case actionTypes.GET_TODOS_START:
-      return {
-        ...state,
-      };
     case actionTypes.GET_TODOS_SUCCESS:
       return {
         ...state,
         todos: action.payload,
       };
-    case actionTypes.GET_TODOS_FAILED:
+    case actionTypes.DELETE_TODO_ITEM_SUCCESS:
       return {
         ...state,
+        todos: state.todos.filter(
+          (todoItem) => todoItem.uuid !== action.payload
+        ),
       };
+    case actionTypes.DELETE_TODO_ITEM_FAILED:
+    case actionTypes.DELETE_TODO_ITEM_START:
+    case actionTypes.CREATE_TODO_ITEM_START:
+    case actionTypes.GET_TODOS_START:
+    case actionTypes.CREATE_TODO_ITEM_SUCCESS:
+    case actionTypes.CREATE_TODO_ITEM_FAILED:
+    case actionTypes.GET_TODOS_FAILED:
     default:
       return state;
   }

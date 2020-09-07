@@ -8,6 +8,10 @@ export const GET_TODOS_START = "GET_TODOS_START";
 export const GET_TODOS_SUCCESS = "GET_TODOS_SUCCESS";
 export const GET_TODOS_FAILED = "GET_TODOS_FAILED";
 
+export const DELETE_TODO_ITEM_START = "DELETE_TODO_ITEM_START";
+export const DELETE_TODO_ITEM_SUCCESS = "DELETE_TODO_ITEM_SUCCESS";
+export const DELETE_TODO_ITEM_FAILED = "DELETE_TODO_ITEM_FAILED";
+
 export interface ICreateTodoItemStart {
   type: typeof CREATE_TODO_ITEM_START;
 }
@@ -33,10 +37,26 @@ export interface IGetTodosFailed {
   type: typeof GET_TODOS_FAILED;
 }
 
+export interface IDelteTodoItemStart {
+  type: typeof DELETE_TODO_ITEM_START;
+}
+
+export interface IDeleteTodoItemSuccess {
+  type: typeof DELETE_TODO_ITEM_SUCCESS;
+  payload: string;
+}
+
+export interface IDeleteTodoItemFailed {
+  type: typeof DELETE_TODO_ITEM_FAILED;
+}
+
 export type TodosTypes =
   | ICreateTodoItemStart
   | ICreateTodoItemSuccess
   | ICreateTodoItemFailed
   | IGetTodosStart
   | IGetTodosSuccess
-  | IGetTodosFailed;
+  | IGetTodosFailed
+  | IDelteTodoItemStart
+  | IDeleteTodoItemSuccess
+  | IDeleteTodoItemFailed;

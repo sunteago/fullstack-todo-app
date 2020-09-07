@@ -53,3 +53,19 @@ export const getTodos = (): AppThunk => (dispatch) => {
       })
     );
 };
+
+export const deleteTodoItem = (taskUid: string): AppThunk => (dispatch) => {
+  dispatch({ type: actionTypes.DELETE_TODO_ITEM_START });
+  fetch(`${apiConfig.baseUrl}/todos/${taskUid}`, {
+    method: "DELETE",
+  })
+    .then(() =>
+      dispatch({ type: actionTypes.DELETE_TODO_ITEM_SUCCESS, payload: taskUid })
+    )
+    .catch((err) =>
+      dispatch({
+        type: actionTypes.DELETE_TODO_ITEM_FAILED,
+        payload: err,
+      })
+    );
+};
