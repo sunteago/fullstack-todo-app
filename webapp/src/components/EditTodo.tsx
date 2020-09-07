@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import apiConfig from "../config/api";
+import { createTodoItem } from "../store/actions/actions";
+import { useDispatch } from "react-redux";
 
 export default function AddTodo(): JSX.Element {
   const [task, setTask] = useState("");
+  const dispatch = useDispatch();
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setTask(e.target.value);
@@ -10,13 +12,7 @@ export default function AddTodo(): JSX.Element {
   const onAddTodo = (e: React.FormEvent): void => {
     e.preventDefault();
     if (task.trim() === "") return;
-    fetch(`${apiConfig.baseUrl}/todos/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ task }),
-    });
+    dispatch(createTodoItem(task));
   };
 
   return (

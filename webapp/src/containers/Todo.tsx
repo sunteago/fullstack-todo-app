@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useEffect } from "react";
+import { IState } from "../store/reducers";
+import * as actions from "../store/actions/actions";
+import { useSelector, useDispatch } from "react-redux";
 import { ITodo } from "../common/types";
 
 export default function Todo(): JSX.Element {
-  const [todos, setTodos] = useState<ITodo[]>([
-    {
-      todoId: "1234",
-      task: "test todo",
-      done: false,
-    },
-    {
-      todoId: "34567",
-      task: "test todo 2",
-      done: false,
-    },
-  ]);
+  const dispatch = useDispatch();
+  const todos = useSelector((state: IState) => state.todos.todos);
 
   useEffect(() => {
-    //TODO: fetch todos
+    dispatch(actions.getTodos());
   }, []);
 
   return (
@@ -25,8 +17,8 @@ export default function Todo(): JSX.Element {
       <h1>To-Do List</h1>
       <div>
         <ul>
-          {todos.map((todo) => (
-            <li>
+          {todos.map((todo: ITodo) => (
+            <li key={todo.uuid}>
               <p>{todo.task}</p>
               <span>{todo.done ? "done" : "not done"} </span>
             </li>
