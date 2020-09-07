@@ -10,7 +10,7 @@ export default function Todo(): JSX.Element {
 
   useEffect(() => {
     dispatch(actions.getTodos());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
@@ -23,6 +23,9 @@ export default function Todo(): JSX.Element {
               <span>{todo.done ? "done" : "not done"} </span>
               <span onClick={() => dispatch(actions.deleteTodoItem(todo.uuid))}>
                 Delete &times;
+              </span>
+              <span onClick={() => dispatch(actions.setCurrentTodo(todo))}>
+                Update TODO;
               </span>
             </li>
           ))}

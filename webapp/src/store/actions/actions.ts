@@ -29,6 +29,8 @@ export const createTodoItem = (task: string): AppThunk => (dispatch) => {
   })
     .then((res) => res.json())
     .then((todoItem) => {
+      //we dont fetch the todos again to avoid innecesary requests
+
       dispatch({
         type: actionTypes.CREATE_TODO_ITEM_SUCCESS,
         payload: todoItem,
@@ -59,6 +61,40 @@ export const getTodos = (): AppThunk => (dispatch) => {
       })
     );
 };
+export const updateTodoItem = (
+  uuid: string,
+  task: string,
+  done: boolean
+): AppThunk => (dispatch) => {
+  dispatch({ type: actionTypes.UPDATE_TODO_ITEM_START });
+  fetch(`${apiConfig.baseUrl}/todos/${uuid}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      task,
+      done,
+    }),
+  })
+    .then(() => {
+      //we dont fetch the todos again to avoid innecesary requests
+      dispatch({
+        type: actionTypes.UPDATE_TODO_ITEM_SUCCESS,
+        payload: {
+          uuid,
+          task,
+          done,
+        },
+      });
+    })
+    .catch((err) =>
+      dispatch({
+        type: actionTypes.UPDATE_TODO_ITEM_FAILED,
+        payload: err,
+      })
+    );
+};
 
 export const deleteTodoItem = (taskUid: string): AppThunk => (dispatch) => {
   dispatch({ type: actionTypes.DELETE_TODO_ITEM_START });
@@ -74,4 +110,8 @@ export const deleteTodoItem = (taskUid: string): AppThunk => (dispatch) => {
         payload: err,
       })
     );
+};
+
+export const setCurrentTodo = (todo: ITodo) => {
+  return { type: actionTypes.SET_CURRENT_TODO, payload: todo };
 };

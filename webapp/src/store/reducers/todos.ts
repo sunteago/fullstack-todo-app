@@ -4,10 +4,12 @@ import * as actionTypes from "../actions/actionTypes";
 
 export interface ITodosState {
   todos: ITodo[];
+  currentTodo: ITodo | null;
 }
 
 const initialState: ITodosState = {
   todos: [],
+  currentTodo: null,
 };
 
 export default (state: ITodosState = initialState, action: TodosTypes) => {
@@ -28,6 +30,22 @@ export default (state: ITodosState = initialState, action: TodosTypes) => {
       return {
         ...state,
         todos: state.todos.concat(action.payload),
+      };
+    case actionTypes.SET_CURRENT_TODO:
+      return {
+        ...state,
+        currentTodo: action.payload,
+      };
+    case actionTypes.UPDATE_TODO_ITEM_SUCCESS:
+      return {
+        ...state,
+        todos: state.todos.map((todoItem) => {
+          if (todoItem.uuid === action.payload.uuid) {
+            todoItem.done = action.payload.done;
+            todoItem.task = action.payload.task;
+          }
+          return todoItem;
+        }),
       };
     case actionTypes.DELETE_TODO_ITEM_FAILED:
     case actionTypes.DELETE_TODO_ITEM_START:

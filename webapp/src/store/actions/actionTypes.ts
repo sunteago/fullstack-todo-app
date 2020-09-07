@@ -12,6 +12,12 @@ export const DELETE_TODO_ITEM_START = "DELETE_TODO_ITEM_START";
 export const DELETE_TODO_ITEM_SUCCESS = "DELETE_TODO_ITEM_SUCCESS";
 export const DELETE_TODO_ITEM_FAILED = "DELETE_TODO_ITEM_FAILED";
 
+export const UPDATE_TODO_ITEM_START = "UPDATE_TODO_ITEM_START";
+export const UPDATE_TODO_ITEM_SUCCESS = "UPDATE_TODO_ITEM_SUCCESS";
+export const UPDATE_TODO_ITEM_FAILED = "UPDATE_TODO_ITEM_FAILED";
+
+export const SET_CURRENT_TODO = "SET_CURRENT_TODO";
+
 export interface ICreateTodoItemStart {
   type: typeof CREATE_TODO_ITEM_START;
 }
@@ -51,6 +57,24 @@ export interface IDeleteTodoItemFailed {
   type: typeof DELETE_TODO_ITEM_FAILED;
 }
 
+export interface IUpdateTodoItemStart {
+  type: typeof UPDATE_TODO_ITEM_START;
+}
+
+export interface IUpdateTodoItemSuccess {
+  type: typeof UPDATE_TODO_ITEM_SUCCESS;
+  payload: ITodo;
+}
+
+export interface IUpdateTodoItemFailed {
+  type: typeof UPDATE_TODO_ITEM_FAILED;
+}
+
+export interface ISetCurrentTodo {
+  type: typeof SET_CURRENT_TODO;
+  payload: ITodo;
+}
+
 export type TodosTypes =
   | ICreateTodoItemStart
   | ICreateTodoItemSuccess
@@ -60,4 +84,8 @@ export type TodosTypes =
   | IGetTodosFailed
   | IDelteTodoItemStart
   | IDeleteTodoItemSuccess
-  | IDeleteTodoItemFailed;
+  | IDeleteTodoItemFailed
+  | IUpdateTodoItemStart
+  | IUpdateTodoItemSuccess
+  | IUpdateTodoItemFailed
+  | ISetCurrentTodo;
