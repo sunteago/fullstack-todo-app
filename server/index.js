@@ -19,4 +19,4 @@ sequelize
   .sync()
   .then(() => app.listen(PORT))
   .then(() => console.log(`Server listening at port ${PORT}`))
-  .catch((err) => console.log("An error occured", err));
+  .catch((err) => console.log("An error occurred", err));
