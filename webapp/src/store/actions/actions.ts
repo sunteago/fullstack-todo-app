@@ -27,7 +27,13 @@ export const createTodoItem = (task: string): AppThunk => (dispatch) => {
     },
     body: JSON.stringify({ task }),
   })
-    .then(() => dispatch({ type: actionTypes.CREATE_TODO_ITEM_SUCCESS }))
+    .then((res) => res.json())
+    .then((todoItem) => {
+      dispatch({
+        type: actionTypes.CREATE_TODO_ITEM_SUCCESS,
+        payload: todoItem,
+      });
+    })
     .catch((err) =>
       dispatch({
         type: actionTypes.CREATE_TODO_ITEM_FAILED,

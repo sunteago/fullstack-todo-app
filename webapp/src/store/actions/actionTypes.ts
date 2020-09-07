@@ -18,6 +18,7 @@ export interface ICreateTodoItemStart {
 
 export interface ICreateTodoItemSuccess {
   type: typeof CREATE_TODO_ITEM_SUCCESS;
+  payload: ITodo[];
 }
 
 export interface ICreateTodoItemFailed {
