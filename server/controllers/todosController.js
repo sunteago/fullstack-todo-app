@@ -4,6 +4,7 @@ const Todo = require("../models/Todo");
 exports.getTodos = async (req, res, next) => {
   try {
     const todos = await Todo.findAll({
+      attributes: ["uuid", "task", "done", "updatedAt"],
       limit: 10,
       order: [["createdAt", "DESC"]],
     });
