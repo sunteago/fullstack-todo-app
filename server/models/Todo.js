@@ -9,6 +9,7 @@ const Todo = sequelize.define('todo', {
     allowNull: false,
     primaryKey: true
   },
+  uuid: Sequelize.STRING,
   task: Sequelize.STRING,
   done: {
     type: Sequelize.BOOLEAN,
