@@ -1,5 +1,5 @@
 export interface ITodo {
-  todoId: string;
+  uuid: string;
   task: string;
   done: boolean;
 }
