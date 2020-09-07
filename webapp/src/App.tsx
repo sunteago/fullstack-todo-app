@@ -1,8 +1,15 @@
-import React from 'react';
+import React from "react";
+import Todo from "./containers/Todo";
+import EditTodo from "./components/EditTodo";
 
-function App() {
+function App(): JSX.Element {
   return (
-   <div>Ensolvers</div>
+    <div className="container">
+      <header>Ensolvers</header>
+      <EditTodo />
+      <Todo />
+      <footer>Developed my Santiago Vallejo for Ensolvers</footer>
+    </div>
   );
 }
 
