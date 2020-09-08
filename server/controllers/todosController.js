@@ -21,8 +21,8 @@ exports.createTodoItem = async (req, res, next) => {
     return res.status(400).json({ msg: "Need a task to proceed" });
   }
   try {
-    await Todo.create({ task, uuid: uuidv4() });
-    res.status(201).json({ msg: "Task created!" });
+    const createdTask = await Todo.create({ task, uuid: uuidv4() });
+    res.status(201).json({ msg: "Task created!", data: createdTask});
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: "There was an error" });

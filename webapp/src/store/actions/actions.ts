@@ -18,6 +18,11 @@ interface IGetTodosRequest {
   data: ITodo[];
 }
 
+interface ICreateTodoItem {
+  msg: string;
+  data: ITodo;
+}
+
 export const createTodoItem = (task: string): AppThunk => (dispatch) => {
   dispatch({ type: actionTypes.CREATE_TODO_ITEM_START });
   fetch(`${apiConfig.baseUrl}/todos/create`, {
@@ -34,11 +39,11 @@ export const createTodoItem = (task: string): AppThunk => (dispatch) => {
       return res;
     })
     .then((res) => res.json())
-    .then((todoItem) => {
+    .then((todoItem: ICreateTodoItem) => {
       //we dont fetch the todos again to avoid innecesary requests
       dispatch({
         type: actionTypes.CREATE_TODO_ITEM_SUCCESS,
-        payload: todoItem,
+        payload: todoItem.data,
       });
     })
     .catch((err) =>
