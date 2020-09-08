@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { IState } from "../store/reducers";
 import * as actions from "../store/actions/actions";
 import { useSelector, useDispatch } from "react-redux";
-import TodoList from "../components/Todo/TodoList/TodoListContainer";
+import TodoListContainer from "../components/Todo/TodoList/TodoListContainer";
 
 export default function Todo(): JSX.Element {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function Todo(): JSX.Element {
 
   return (
     <div>
-      <TodoList todos={todos} />
+      <TodoListContainer todos={todos} />
     </div>
   );
 }

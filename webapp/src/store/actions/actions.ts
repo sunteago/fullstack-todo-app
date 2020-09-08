@@ -18,6 +18,11 @@ interface IGetTodosRequest {
   data: ITodo[];
 }
 
+interface ICreateTodoItem {
+  msg: string;
+  data: ITodo;
+}
+
 export const createTodoItem = (task: string): AppThunk => (dispatch) => {
   dispatch({ type: actionTypes.CREATE_TODO_ITEM_START });
   fetch(`${apiConfig.baseUrl}/todos/create`, {
@@ -27,13 +32,18 @@ export const createTodoItem = (task: string): AppThunk => (dispatch) => {
     },
     body: JSON.stringify({ task }),
   })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("There was a problem");
+      }
+      return res;
+    })
     .then((res) => res.json())
-    .then((todoItem) => {
+    .then((todoItem: ICreateTodoItem) => {
       //we dont fetch the todos again to avoid innecesary requests
-
       dispatch({
         type: actionTypes.CREATE_TODO_ITEM_SUCCESS,
-        payload: todoItem,
+        payload: todoItem.data,
       });
     })
     .catch((err) =>
@@ -47,16 +57,22 @@ export const createTodoItem = (task: string): AppThunk => (dispatch) => {
 export const getTodos = (): AppThunk => (dispatch) => {
   dispatch({ type: actionTypes.GET_TODOS_START });
   fetch(`${apiConfig.baseUrl}/todos`)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("There was a problem");
+      }
+      return res;
+    })
     .then((res) => res.json())
-    .then((todosReq: IGetTodosRequest) =>
+    .then((todosReq: IGetTodosRequest) => {
       dispatch({
         type: actionTypes.GET_TODOS_SUCCESS,
         payload: todosReq.data,
-      })
-    )
+      });
+    })
     .catch((err) =>
       dispatch({
-        type: actionTypes.GET_TODOS_SUCCESS,
+        type: actionTypes.GET_TODOS_FAILED,
         payload: err,
       })
     );
@@ -77,6 +93,12 @@ export const updateTodoItem = (
       done,
     }),
   })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("There was a problem");
+      }
+      return res;
+    })
     .then(() => {
       //we dont fetch the todos again to avoid innecesary requests
       dispatch({
@@ -101,6 +123,12 @@ export const deleteTodoItem = (taskUid: string): AppThunk => (dispatch) => {
   fetch(`${apiConfig.baseUrl}/todos/${taskUid}`, {
     method: "DELETE",
   })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("There was a problem");
+      }
+      return res;
+    })
     .then(() =>
       dispatch({ type: actionTypes.DELETE_TODO_ITEM_SUCCESS, payload: taskUid })
     )
@@ -112,6 +140,6 @@ export const deleteTodoItem = (taskUid: string): AppThunk => (dispatch) => {
     );
 };
 
-export const setCurrentTodo = (todo: ITodo) => {
+export const setCurrentTodo = (todo: ITodo | null) => {
   return { type: actionTypes.SET_CURRENT_TODO, payload: todo };
 };
