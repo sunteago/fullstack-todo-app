@@ -51,7 +51,7 @@ exports.updateTodoItem = async (req, res, next) => {
     });
 
     todo.task = newTask;
-    todo.done = done === 1 ? true : false;
+    todo.done = done;
     await todo.save();
     return res.status(200).json({ msg: "Task updated successfully" });
   } catch (err) {
