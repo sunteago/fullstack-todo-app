@@ -6,12 +6,14 @@ interface ITodoListProps {
   todos: ITodo[];
   toggleTodo: Function;
   deleteTodo: Function;
+  setCurrentTodo: Function;
 }
 
 export default function TodoList({
   todos,
   toggleTodo,
   deleteTodo,
+  setCurrentTodo,
 }: ITodoListProps) {
   return (
     <ul>
@@ -21,6 +23,7 @@ export default function TodoList({
           todo={todoItem}
           deleteTodo={deleteTodo}
           toggleTodo={toggleTodo}
+          setCurrentTodo={setCurrentTodo}
         />
       ))}
     </ul>

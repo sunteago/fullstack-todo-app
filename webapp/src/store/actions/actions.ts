@@ -140,6 +140,6 @@ export const deleteTodoItem = (taskUid: string): AppThunk => (dispatch) => {
     );
 };
 
-export const setCurrentTodo = (todo: ITodo) => {
+export const setCurrentTodo = (todo: ITodo | null) => {
   return { type: actionTypes.SET_CURRENT_TODO, payload: todo };
 };

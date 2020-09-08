@@ -15,13 +15,17 @@ export default function TodoListContainer({ todos }: { todos: ITodo[] }) {
     else notDoneTodos.push(todoItem);
   });
 
-  const toggleTodo = (todo: ITodo) => {
+  const toggleTodo = (todo: ITodo): void => {
     const { uuid, task, done } = todo;
     dispatch(actions.updateTodoItem(uuid, task, !done));
   };
 
-  const deleteTodo = (uid: string) => {
+  const deleteTodo = (uid: string): void => {
     dispatch(actions.deleteTodoItem(uid));
+  };
+
+  const setCurrentTodo = (todo: ITodo): void => {
+    dispatch(actions.setCurrentTodo(todo));
   };
 
   return (
@@ -31,12 +35,14 @@ export default function TodoListContainer({ todos }: { todos: ITodo[] }) {
         todos={notDoneTodos}
         toggleTodo={toggleTodo}
         deleteTodo={deleteTodo}
+        setCurrentTodo={setCurrentTodo}
       />
       <h1 className={classes.Title}>Already Done!</h1>
       <TodoList
         todos={doneTodos}
         toggleTodo={toggleTodo}
         deleteTodo={deleteTodo}
+        setCurrentTodo={setCurrentTodo}
       />
     </div>
   );
