@@ -4,6 +4,7 @@ const cors = require("cors");
 const sequelize = require("./config/db");
 
 const todosRoutes = require("./routes/todos");
+const userRoutes = require("./routes/user");
 
 const PORT = 4000;
 
@@ -14,6 +15,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/todos", todosRoutes);
+
+app.use("/user", userRoutes);
 
 sequelize
   .sync()
