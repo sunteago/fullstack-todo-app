@@ -6,6 +6,7 @@ export interface IUserState {
     email: string;
     token: string;
   };
+  isAuthenticated: null | boolean;
 }
 
 const initialState: IUserState = {
@@ -13,6 +14,7 @@ const initialState: IUserState = {
     email: "",
     token: "",
   },
+  isAuthenticated: null,
 };
 
 export default (state: IUserState = initialState, action: UserTypes) => {
@@ -24,6 +26,11 @@ export default (state: IUserState = initialState, action: UserTypes) => {
           email: action.payload.email,
           token: action.payload.token,
         },
+      };
+    case actionTypes.LOGOUT_USER_SUCCESS:
+      return {
+        ...initialState,
+        isAuthenticated: false,
       };
     case actionTypes.CREATE_USER_START:
     default:

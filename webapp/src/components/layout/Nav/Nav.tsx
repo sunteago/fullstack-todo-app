@@ -5,7 +5,10 @@ export default function Nav() {
   const [toggled, setToggled] = useState(false);
   return (
     <>
-      <div onClick={() => setToggled(!toggled)} className={classes.MobileNav}>
+      <div
+        onClick={() => setToggled(!toggled)}
+        className={`${classes.MobileNav}  ${toggled ? classes.Toggled : ""}`}
+      >
         <div className={classes.Toggle}>
           <div
             className={`${classes.Bar}  ${toggled ? classes.Toggled : ""}`}

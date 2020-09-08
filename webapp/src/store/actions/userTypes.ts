@@ -1,4 +1,4 @@
-import { ISignupResponse } from "./userActions";
+import { IAuthResponse } from "./userActions";
 
 export const CREATE_USER_START = "CREATE_USER_START";
 export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
@@ -18,7 +18,7 @@ interface ICreateUserStart {
 
 interface ICreateUserSuccess {
   type: typeof CREATE_USER_SUCCESS;
-  payload: ISignupResponse;
+  payload: IAuthResponse;
 }
 
 interface ICreateUserFailed {

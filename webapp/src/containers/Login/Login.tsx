@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createAccount } from "../../store/actions/actions";
+import { logIn } from "../../store/actions/actions";
 
 import AuthForm from "../AuthForm/AuthForm";
 
@@ -17,15 +17,9 @@ const textInputArr = [
     placeholder: "At least 6 characters",
     label: "Password",
   },
-  {
-    type: "password",
-    name: "cpassword",
-    placeholder: "Repeat password",
-    label: "Confirm Password",
-  },
 ];
 
-export default function Signup(): JSX.Element {
+export default function Login(): JSX.Element {
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -38,12 +32,12 @@ export default function Signup(): JSX.Element {
     e.preventDefault();
     const { email, password } = values;
     if (email.trim() === "" || password.trim() === "") return;
-    dispatch(createAccount({ email, password }));
+    dispatch(logIn({ email, password }));
   };
 
   return (
     <AuthForm
-      submitText="Sign up"
+      submitText="Log in"
       onSubmitHandler={onSubmitHandler}
       values={values}
       setValues={setValues}

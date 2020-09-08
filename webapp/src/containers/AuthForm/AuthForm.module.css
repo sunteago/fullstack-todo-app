@@ -1,0 +1,22 @@
+.Form {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.Form label {
+  font-size: 1.25rem;
+  margin: 1rem 0;
+  display: block;
+}
+
+.Form input {
+  font-size: 1.125rem;
+}
+
+.Form input[type="submit"] {
+  display: block;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  margin: 2rem auto;
+  padding: 1rem;
+}

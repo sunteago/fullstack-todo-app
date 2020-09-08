@@ -4,7 +4,7 @@ export interface ITodo {
   done: boolean;
 }
 
-export interface INewAccount {
+export interface Credentials {
   email: string;
   password: string;
 }
