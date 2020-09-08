@@ -1,6 +1,5 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
-const { v4: uuidv4 } = require("uuid");
 
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -65,7 +64,6 @@ exports.signUp = async (req, res, next) => {
   const newUser = {
     email,
     password: hashedPw,
-    uuid: uuidv4(),
   };
 
   try {

@@ -5,7 +5,7 @@ exports.authenticate = (req, res, next) => {
     {
       user: {
         email: req.user.email,
-        uuid: req.user.uuid,
+        userId: req.user.id,
       },
     },
     process.env.JWT_SECRET,
