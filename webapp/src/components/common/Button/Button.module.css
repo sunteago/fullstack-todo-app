@@ -1,0 +1,20 @@
+.Button {
+  padding: 0.5rem;
+  background: linear-gradient(
+    0,
+    rgb(168, 59, 77) 0%,
+    rgba(168, 82, 97, 1) 100%
+  );
+  border-radius: var(--radius);
+  border: none;
+  color: #fff;
+  flex-grow: 1;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.2s opacity ease-in;
+}
+
+.Button:hover,
+.Button:focus {
+  opacity: 1;
+}

@@ -1,0 +1,38 @@
+.TodoItem {
+  list-style: none;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.2s opacity ease-in;
+}
+
+.TodoItem:hover,
+.TodoItem:focus {
+  opacity: 1;
+}
+
+.Task {
+  font-family: var(--font-secondary);
+  font-size: 2.25rem;
+}
+
+.Done {
+  text-decoration: line-through;
+}
+
+.DoneTodo {
+  background: var(--primary);
+  padding: 0.3rem;
+}
+
+.DoneTodo svg {
+  width: 150%;
+}
+
+.DeleteTodo {
+  color: red;
+}
