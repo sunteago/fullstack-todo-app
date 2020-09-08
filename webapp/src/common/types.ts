@@ -3,3 +3,8 @@ export interface ITodo {
   task: string;
   done: boolean;
 }
+
+export interface INewAccount {
+  email: string;
+  password: string;
+}

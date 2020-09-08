@@ -14,5 +14,7 @@ exports.authenticate = (req, res, next) => {
     }
   );
 
-  return res.status(200).json({ msg: "User Authenticated", data: token });
+  return res
+    .status(200)
+    .json({ msg: "User Authenticated", token: token, email: req.user.email });
 };
