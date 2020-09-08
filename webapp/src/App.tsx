@@ -1,15 +1,14 @@
 import React from "react";
-import Todo from "./containers/Todo";
-import EditTodo from "./components/EditTodo";
+import Main from "./containers/Main";
+import EditTodo from "./components/Todo/EditTodo/EditTodo";
+import Layout from "./containers/Layout";
 
 function App(): JSX.Element {
   return (
-    <div className="container">
-      <header>Ensolvers</header>
+    <Layout>
       <EditTodo />
-      <Todo />
-      <footer>Developed my Santiago Vallejo for Ensolvers</footer>
-    </div>
+      <Main />
+    </Layout>
   );
 }
 

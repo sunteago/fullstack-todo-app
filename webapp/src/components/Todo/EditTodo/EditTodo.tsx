@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { createTodoItem, updateTodoItem } from "../store/actions/actions";
+import { createTodoItem, updateTodoItem } from "../../../store/actions/actions";
 import { useSelector, useDispatch } from "react-redux";
-import { IState } from "../store/reducers";
+import { IState } from "../../../store/reducers";
+import TextInput from "../../common/TextInput/TextInput";
+import Button from "../../common/Button/Button";
+import classes from "./EditTodo.module.css";
 
 export default function AddTodo(): JSX.Element {
   const [task, setTask] = useState("");
@@ -32,17 +35,17 @@ export default function AddTodo(): JSX.Element {
   };
 
   return (
-    <form onSubmit={onAddTodo}>
-      <input
-        onChange={onChangeHandler}
-        value={task}
-        type="text"
-        placeholder="Task"
-      />
-      <button type="button" onClick={() => setDone(!done)}>
-        {done ? "Done!" : "Not Done"}
-      </button>
-      <input type="submit" value="Add" />
-    </form>
+    <>
+      <form className={classes.Form} onSubmit={onAddTodo}>
+        <TextInput
+          onChange={onChangeHandler}
+          value={task}
+          type="text"
+          placeholder="Task"
+        />
+
+        <Button type="submit" value={currentTodo ? "Update" : "Add"} />
+      </form>
+    </>
   );
 }

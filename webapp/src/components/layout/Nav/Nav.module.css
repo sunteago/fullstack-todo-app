@@ -1,0 +1,134 @@
+.MobileNav {
+  background: var(--dark-primary);
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  transform: rotate(45deg) translate(0, -80%);
+  right: 0;
+  top: 0;
+  z-index: 150;
+  cursor: pointer;
+}
+
+.Toggle {
+  position: absolute;
+  margin: auto;
+  transform: rotate(-45deg);
+  width: 30px;
+  right: 0;
+  left: 0;
+  bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.Bar {
+  position: relative;
+  width: 40px;
+  height: 2px;
+  background: #fff;
+}
+
+.Bar:before,
+.Bar:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  left: 0;
+  transform-origin: center center;
+  transition: transform 0.25s ease, top 0.25s ease, bottom 0.25s ease;
+}
+
+.Bar:before {
+  top: -10px;
+}
+
+.Bar:after {
+  bottom: -10px;
+}
+
+.Bar.Toggled {
+  background: transparent;
+}
+.Bar.Toggled::before,
+.Bar.Toggled::after {
+  background: #fff;
+}
+
+.Bar.Toggled::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+.Bar.Toggled::after {
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
+.MenuHeading {
+  display: none;
+}
+
+.NavigationBar {
+  position: fixed;
+  top: 0;
+  right: -200px;
+  height: 100%;
+  width: 200px;
+  background: var(--dark-primary);
+  z-index: 100;
+  transition: right 0.2s ease-in;
+}
+
+.NavigationBar h3 {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+.NavigationBar nav {
+  height: 100%;
+  margin-top: 1rem;
+}
+.NavigationBar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.NavigationBar li {
+  font-size: 1.5rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.NavigationBar li:hover,
+.NavigationBar li:focus {
+  font-weight: bold;
+}
+
+.Hide {
+  right: -200px;
+}
+.NavigationBar.Toggled {
+  display: block !important;
+  right: 0;
+}
+
+@media (min-width: 1280px) {
+  .MenuHeading {
+    display: block;
+  }
+  .MobileNav {
+    display: none;
+  }
+  .NavigationBar {
+    display: block;
+    right: 0;
+  }
+}
