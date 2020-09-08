@@ -8,19 +8,15 @@ interface ITextInput {
   value: string;
 }
 
-export default function TextInput({
-  type,
-  placeholder,
-  onChange,
-  value,
-}: ITextInput) {
-  return (
+export default React.forwardRef(
+  ({ type, placeholder, onChange, value }: ITextInput, ref: any) => (
     <input
       className={classes.TextInput}
       type={type}
       placeholder={placeholder}
       onChange={onChange}
       value={value}
+      ref={ref}
     />
-  );
-}
+  )
+);

@@ -10,8 +10,14 @@ export default function AddTodo(): JSX.Element {
   const [task, setTask] = useState("");
   const [done, setDone] = useState(false);
 
+  const inputRef = React.createRef<HTMLInputElement>();
   const dispatch = useDispatch();
   const currentTodo = useSelector((state: IState) => state.todos.currentTodo);
+
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.focus();
+    console.log(inputRef.current);
+  }, [inputRef]);
 
   useEffect(() => {
     if (currentTodo) {
@@ -42,6 +48,7 @@ export default function AddTodo(): JSX.Element {
           value={task}
           type="text"
           placeholder="Task"
+          ref={inputRef}
         />
 
         <Button type="submit" value={currentTodo ? "Update" : "Add"} />
