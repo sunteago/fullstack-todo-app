@@ -17,12 +17,14 @@ exports.getTodos = async (req, res, next) => {
 
 exports.createTodoItem = async (req, res, next) => {
   const task = req.body.task;
+  const { uuid: userId, email } = req.user;
+  console.log(userId, email);
   if (!task) {
     return res.status(400).json({ msg: "Need a task to proceed" });
   }
   try {
     const createdTask = await Todo.create({ task, uuid: uuidv4() });
-    res.status(201).json({ msg: "Task created!", data: createdTask});
+    res.status(201).json({ msg: "Task created!", data: createdTask });
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: "There was an error" });

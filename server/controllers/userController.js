@@ -1,6 +1,5 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 
 exports.login = async (req, res, next) => {
@@ -35,15 +34,9 @@ exports.login = async (req, res, next) => {
     return res.status(403).json({ msg: "Invalid credentials" });
   }
 
-  const token = jwt.sign(
-    {
-      email: user.email,
-      uuid: user.uuid,
-    },
-    process.env.JWT_SECRET
-  );
+  req.user = user;
 
-  res.status(200).json({ msg: "Log in success", data: token });
+  next();
 };
 
 exports.signUp = async (req, res, next) => {
@@ -76,9 +69,8 @@ exports.signUp = async (req, res, next) => {
   };
 
   try {
-    const createdUser = await User.create(newUser);
-
-    return res.status(201).json({ msg: "User Created", data: createdUser });
+    req.user = await User.create(newUser);
+    next();
   } catch (err) {
     return res
       .status(500)

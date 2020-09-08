@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
   }
   try {
     const crypted = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(crypted);
     req.user = crypted.user;
     next();
   } catch (error) {
