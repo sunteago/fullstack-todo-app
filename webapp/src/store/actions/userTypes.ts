@@ -21,6 +21,7 @@ interface ICreateUserSuccess {
 
 interface ICreateUserFailed {
   type: typeof CREATE_USER_FAILED;
+  payload: string;
 }
 
 interface ILoginUserStart {
@@ -37,6 +38,7 @@ interface ILoginUserSuccess {
 
 interface ILoginUserFailed {
   type: typeof LOGIN_USER_FAILED;
+  payload: string;
 }
 
 export interface ILogoutUser {
