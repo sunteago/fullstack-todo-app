@@ -11,14 +11,18 @@ interface IPageContent {
 }
 
 export default function Layout({ children }: IPageContent): JSX.Element {
-  const error = useSelector((state: IState) => state.user.error);
-
+  const user = useSelector((state: IState) => state.user);
+  const {
+    error,
+    currentUser: { email },
+  } = user;
   return (
     <>
       <Nav />
       <main className={classes.MainLayout}>
         <div className={classes.PageContainer}>
-          <Header />
+          <Header email={email} />
+
           <div className={classes.ErrorContainer}>
             {error ? <p className={classes.ErrorMsg}>{error}</p> : ""}
           </div>

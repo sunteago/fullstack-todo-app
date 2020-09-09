@@ -74,7 +74,7 @@
 }
 
 .MenuHeading {
-  display: none;
+  opacity: 0;
 }
 
 .NavigationBar {
@@ -133,7 +133,7 @@
 
 @media (min-width: 1280px) {
   .MenuHeading {
-    display: block;
+    opacity: 1;
   }
   .MobileNav {
     display: none;
