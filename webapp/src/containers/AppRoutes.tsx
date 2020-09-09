@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IState } from "../store/reducers/index";
@@ -15,8 +15,12 @@ export default function AppRoutes() {
   const history = useHistory();
   const isAuth = useSelector((state: IState) => state.user.isAuthenticated);
 
+  const location = useLocation();
+
+  const locationRef = React.useRef(location.pathname);
+
   useEffect(() => {
-    dispatch(checkIsAuth(history));
+    dispatch(checkIsAuth(history, locationRef.current));
   }, [dispatch, history]);
 
   return isAuth === null ? (

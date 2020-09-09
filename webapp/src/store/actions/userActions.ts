@@ -104,11 +104,13 @@ export const logOut = (history: any) => {
   };
 };
 
-export const checkIsAuth = (history: any): AppThunk => (dispatch) => {
+export const checkIsAuth = (history: any, pathname: string): AppThunk => (
+  dispatch
+) => {
   const token = localStorage.getItem("ens_token");
   if (!token) {
     dispatch({ type: actionTypes.LOGOUT_USER });
-    return history.push("/login");
+    return history.push(pathname || "/login");
   }
   dispatch(getInitialTodos(token, history));
   fetch(`${apiConfig.baseUrl}/user/auth`, {

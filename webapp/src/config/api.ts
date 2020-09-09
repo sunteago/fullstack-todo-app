@@ -1,5 +1,5 @@
 const apiConfig = {
-  baseUrl: "http://localhost:4000" || process.env.REACT_APP_BACKEND_URL,
+  baseUrl: process.env.REACT_APP_BACKEND_URL || "http://localhost:4000",
 };
 
 export default apiConfig;
