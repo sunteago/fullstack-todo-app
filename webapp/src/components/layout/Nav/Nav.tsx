@@ -1,4 +1,4 @@
-import React, { useState, MouseEventHandler } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { logOut } from "../../../store/actions/actions";
@@ -22,6 +22,11 @@ export default function Nav() {
     if (e.target.tagName.toLowerCase() === "a") {
       setToggled(false);
     }
+  };
+
+  const onLogoutHandler = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    dispatch(logOut(history));
   };
 
   return (
@@ -52,7 +57,7 @@ export default function Nav() {
             ) : (
               <>
                 <Link to="/main">Main</Link>
-                <a href="#" onClick={() => dispatch(logOut(history))}>
+                <a href="/" onClick={onLogoutHandler}>
                   Logout
                 </a>
               </>
