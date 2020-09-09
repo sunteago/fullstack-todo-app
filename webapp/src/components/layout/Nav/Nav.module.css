@@ -74,7 +74,7 @@
 }
 
 .MenuHeading {
-  display: none;
+  opacity: 0;
 }
 
 .NavigationBar {
@@ -99,22 +99,28 @@
   height: 100%;
   margin-top: 1rem;
 }
-.NavigationBar ul {
+.NavigationBar div {
   list-style: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.NavigationBar li {
+.NavigationBar a {
   font-size: 1.5rem;
   padding: 1rem;
   cursor: pointer;
 }
 
-.NavigationBar li:hover,
-.NavigationBar li:focus {
+.NavigationBar a:hover,
+.NavigationBar a:focus {
   font-weight: bold;
+}
+
+.NavigationBar a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
 }
 
 .Hide {
@@ -127,7 +133,7 @@
 
 @media (min-width: 1280px) {
   .MenuHeading {
-    display: block;
+    opacity: 1;
   }
   .MobileNav {
     display: none;

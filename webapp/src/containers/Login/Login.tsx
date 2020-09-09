@@ -4,6 +4,7 @@ import { logIn } from "../../store/actions/actions";
 import { useHistory } from "react-router-dom";
 import { isValidLogin } from "../../common/validation";
 import AuthForm from "../AuthForm/AuthForm";
+import SectionTitle from "../../components/common/SectionTitle/SectionTitle";
 
 export default function Login(): JSX.Element {
   const [values, setValues] = useState({
@@ -28,15 +29,18 @@ export default function Login(): JSX.Element {
   };
 
   return (
-    <AuthForm
-      setErrors={setErrors}
-      submitText="Log in"
-      onSubmitHandler={onSubmitHandler}
-      values={values}
-      setValues={setValues}
-      textInputArr={textInputArr}
-      errors={errors}
-    />
+    <>
+      <SectionTitle>Log in</SectionTitle>
+      <AuthForm
+        setErrors={setErrors}
+        submitText="Log in"
+        onSubmitHandler={onSubmitHandler}
+        values={values}
+        setValues={setValues}
+        textInputArr={textInputArr}
+        errors={errors}
+      />
+    </>
   );
 }
 

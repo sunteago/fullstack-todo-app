@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, MouseEventHandler } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { logOut } from "../../../store/actions/actions";
@@ -14,7 +14,15 @@ export default function Nav() {
 
   const user = useSelector((state: IState) => state.user);
 
+  const { isAuthenticated: isAuth } = user;
+
   const history = useHistory();
+
+  const onClickMenuHandler = (e: any) => {
+    if (e.target.tagName.toLowerCase() === "a") {
+      setToggled(false);
+    }
+  };
 
   return (
     <>
@@ -34,22 +42,23 @@ export default function Nav() {
         }`}
       >
         <h3 className={classes.MenuHeading}>Menu</h3>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/signup">Sign up</Link>
-            </li>
-            <li>
-              <Link to="/main">Main</Link>
-            </li>
-            <li onClick={() => dispatch(logOut(history))}>Logout</li>
-            <li>
-              <Link to="/login">Log in</Link>
-            </li>
-            <li>
-              <Link to="/signup">About</Link>
-            </li>
-          </ul>
+        <nav onClick={onClickMenuHandler}>
+          <div>
+            {!isAuth ? (
+              <>
+                <Link to="/signup">Sign up</Link>
+                <Link to="/login">Log in</Link>
+              </>
+            ) : (
+              <>
+                <Link to="/main">Main</Link>
+                <a href="#" onClick={() => dispatch(logOut(history))}>
+                  Logout
+                </a>
+              </>
+            )}
+            <Link to="/signup">About</Link>
+          </div>
         </nav>
       </div>
     </>

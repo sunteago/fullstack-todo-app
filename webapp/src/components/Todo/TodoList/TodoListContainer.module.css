@@ -10,11 +10,11 @@
 .Title {
   text-align: center;
   margin: 2rem auto;
-  padding: 0.3rem 0.5rem;
+  padding: 0.3rem 1.5rem;
   background: var(--primary);
   color: var(--secondary);
   font-weight: 100;
-  font-size: 1.75rem;
+  font-size: 2rem;
 }
 
 .TodoList {

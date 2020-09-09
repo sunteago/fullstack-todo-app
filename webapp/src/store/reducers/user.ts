@@ -28,6 +28,7 @@ export default (state: IUserState = initialState, action: UserTypes) => {
           email: action.payload.email,
           token: action.payload.token,
         },
+        isAuthenticated: true,
       };
     case actionTypes.LOGIN_USER_SUCCESS:
       return {
