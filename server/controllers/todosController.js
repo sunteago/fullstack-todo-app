@@ -71,6 +71,8 @@ exports.updateTodoItem = async (req, res, next) => {
 
 exports.deleteTodoItem = async (req, res, next) => {
   const todoId = req.params.todoId;
+  const userId = req.user.userId;
+
   if (!todoId) {
     return res.status(400).json({ msg: "Need a todo to proceed" });
   }

@@ -31,7 +31,7 @@ export default function TodoListContainer({ todos }: { todos: ITodo[] }) {
     dispatch(deleteTodoItem(uid, token));
   };
 
-  const setCurrentTodo = (todo: ITodo): void => {
+  const onSetTodoHandler = (todo: ITodo): void => {
     dispatch(setCurrentTodo(todo));
   };
 
@@ -42,14 +42,14 @@ export default function TodoListContainer({ todos }: { todos: ITodo[] }) {
         todos={notDoneTodos}
         toggleTodo={toggleTodo}
         deleteTodo={deleteTodo}
-        setCurrentTodo={setCurrentTodo}
+        setCurrentTodo={onSetTodoHandler}
       />
       <h1 className={classes.Title}>Already Done!</h1>
       <TodoList
         todos={doneTodos}
         toggleTodo={toggleTodo}
         deleteTodo={deleteTodo}
-        setCurrentTodo={setCurrentTodo}
+        setCurrentTodo={onSetTodoHandler}
       />
     </div>
   );
