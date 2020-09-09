@@ -16,7 +16,7 @@ export default function AppRoutes() {
 
   useEffect(() => {
     dispatch(checkIsAuth(history));
-  }, []);
+  }, [dispatch, history]);
 
   return isAuth === null ? (
     <Spinner />

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Dispatch, SetStateAction } from "react";
 import classes from "./FieldError.module.css";
 
 interface IFieldError {
@@ -23,7 +22,7 @@ export default function FieldError({
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [error]);
+  }, [error, clearErrors]);
 
   return (
     <p className={`${classes.FieldError} ${error ? classes.Error : ""}`}>

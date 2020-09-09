@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IState } from "../store/reducers";
 import { useSelector } from "react-redux";
 import TodoListContainer from "../components/Todo/TodoList/TodoListContainer";
