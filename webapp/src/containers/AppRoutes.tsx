@@ -27,7 +27,7 @@ export default function AppRoutes() {
         <Signup />
       </Route>
       <Route path="/login">
-        <About />
+        <Login />
       </Route>
       <Route path="/about">
         <About />
