@@ -9,11 +9,13 @@ import { useSelector, useDispatch } from "react-redux";
 
 import TextInput from "../../common/TextInput/TextInput";
 import Button from "../../common/Button/Button";
+import FieldError from "../../common/FieldError/FieldError";
 
 import { IState } from "../../../store/reducers";
 
 export default function AddTodo(): JSX.Element {
-  const [task, setTask] = useState("");
+  const [task, setTask] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const currentTodo = useSelector((state: IState) => state.todos.currentTodo);
   const { token } = useSelector((state: IState) => state.user.currentUser);
@@ -31,12 +33,28 @@ export default function AddTodo(): JSX.Element {
     }
   }, [currentTodo, dispatch]);
 
+  const clearErrors = () => {
+    setError("");
+  };
+
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setTask(e.target.value);
 
+  const isValid = (): boolean => {
+    if (task.trim() === "") {
+      setError("Task cannot be empty");
+      return false;
+    }
+    if (task.trim().length < 5) {
+      setError("Task should be at least 5 characters long");
+      return false;
+    }
+    return true;
+  };
+
   const onAddTodo = (e: React.FormEvent): void => {
     e.preventDefault();
-    if (task.trim() === "") return;
+    if (!isValid()) return;
     if (currentTodo) {
       dispatch(updateTodoItem(currentTodo.uuid, task, currentTodo.done, token));
     } else {
@@ -52,6 +70,7 @@ export default function AddTodo(): JSX.Element {
 
   return (
     <>
+      <h1 className={classes.AddTodoTitle}>Add a new task</h1>
       <form className={classes.Form} onSubmit={onAddTodo}>
         <TextInput
           onChange={onChangeHandler}
@@ -64,6 +83,7 @@ export default function AddTodo(): JSX.Element {
 
         <Button type="submit" value={currentTodo ? "Update" : "Add"} />
       </form>
+      <FieldError name="task" error={error} clearErrors={clearErrors} />
     </>
   );
 }

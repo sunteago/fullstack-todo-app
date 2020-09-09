@@ -1,0 +1,11 @@
+.FieldError {
+  color: transparent;
+  margin: 1rem auto;
+  font-size: 1.125rem;
+  text-align: center;
+  transition: color 0.15s ease-in;
+}
+
+.FieldError.Error {
+  color: rgb(241, 99, 99);
+}

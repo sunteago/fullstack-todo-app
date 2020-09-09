@@ -3,12 +3,17 @@ import React from "react";
 import TextInput from "../../components/common/TextInput/TextInput";
 import Button from "../../components/common/Button/Button";
 import classes from "./AuthForm.module.css";
+import FieldError from "../../components/common/FieldError/FieldError";
 
 interface IAuthFormProps {
   onSubmitHandler: React.FormEventHandler;
   submitText: string;
-  setValues: Function;
+  setErrors: (v: any) => void;
   values: {
+    [index: string]: string;
+  };
+  setValues: Function;
+  errors: {
     [index: string]: string;
   };
   textInputArr: {
@@ -26,7 +31,17 @@ export default function AuthForm(props: IAuthFormProps): JSX.Element {
     setValues,
     values,
     textInputArr,
+    setErrors,
+    errors,
   } = props;
+
+  const errorsObj: { [k: string]: string } = {};
+
+  textInputArr.forEach((input) => (errorsObj[input.name] = ""));
+
+  const clearErrors = () => {
+    setErrors(errorsObj);
+  };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -36,7 +51,7 @@ export default function AuthForm(props: IAuthFormProps): JSX.Element {
     setValues({ ...values, [name]: "" });
   };
   return (
-    <form onSubmit={onSubmitHandler} className={classes.Form}>
+    <form onSubmit={onSubmitHandler} className={classes.Form} noValidate>
       {textInputArr.map((input) => {
         return (
           <React.Fragment key={input.name}>
@@ -49,6 +64,11 @@ export default function AuthForm(props: IAuthFormProps): JSX.Element {
               placeholder={input.placeholder}
               name={input.name}
               id={input.name}
+            />
+            <FieldError
+              name={input.name}
+              error={errors[input.name]}
+              clearErrors={clearErrors}
             />
           </React.Fragment>
         );

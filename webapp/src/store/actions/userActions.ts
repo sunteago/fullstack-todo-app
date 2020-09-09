@@ -2,7 +2,7 @@ import apiConfig from "../../config/api";
 import * as actionTypes from "./actionTypes";
 import { getInitialTodos } from "./todosActions";
 
-import { Credentials } from "../../common/types";
+import { Credentials, IErrMsg } from "../../common/types";
 import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { ITodosState } from "../reducers/todos";
@@ -33,7 +33,9 @@ export const createAccount = (newAcc: Credentials, history: any): AppThunk => (
   })
     .then((res) => {
       if (!res.ok) {
-        throw new Error("There was a problem");
+        throw new Error(
+          "There was a problem trying to create an new account, maybe that email is already in use"
+        );
       }
       return res;
     })
@@ -46,12 +48,13 @@ export const createAccount = (newAcc: Credentials, history: any): AppThunk => (
       localStorage.setItem("ens_token", credentials.token);
       dispatch(getInitialTodos(credentials.token, history));
     })
-    .catch((err) => {
+    .catch((err: IErrMsg) => {
       localStorage.removeItem("ens_token");
       dispatch({
         type: actionTypes.CREATE_USER_FAILED,
-        payload: err,
+        payload: err.message,
       });
+      dispatch(clearErrors());
     });
 };
 
@@ -68,7 +71,9 @@ export const logIn = (newAcc: Credentials, history: any): AppThunk => (
   })
     .then((res) => {
       if (!res.ok) {
-        throw new Error("There was a problem");
+        throw new Error(
+          "There was a problem trying to login, please check your credentials"
+        );
       }
       return res;
     })
@@ -81,17 +86,19 @@ export const logIn = (newAcc: Credentials, history: any): AppThunk => (
       localStorage.setItem("ens_token", credentials.token);
       dispatch(getInitialTodos(credentials.token, history));
     })
-    .catch((err) => {
+    .catch((err: IErrMsg) => {
       localStorage.removeItem("ens_token");
       dispatch({
         type: actionTypes.LOGIN_USER_FAILED,
-        payload: err,
+        payload: err.message,
       });
+      dispatch(clearErrors());
     });
 };
 
 export const logOut = (history: any) => {
   history.push("/login");
+  localStorage.removeItem("ens_token");
   return {
     type: actionTypes.LOGOUT_USER,
   };
@@ -126,8 +133,17 @@ export const checkIsAuth = (history: any): AppThunk => (dispatch) => {
         },
       });
     })
-    .catch((err) => {
+    .catch((err: IErrMsg) => {
       localStorage.removeItem("ens_token");
-      dispatch({ type: actionTypes.LOGIN_USER_FAILED });
+      dispatch({ type: actionTypes.LOGIN_USER_FAILED, payload: err.message });
+      dispatch(clearErrors());
     });
+};
+
+export const clearErrors = (): AppThunk => (dispatch) => {
+  setTimeout(() => {
+    dispatch({
+      type: actionTypes.CLEAR_ERRORS,
+    });
+  }, 3000);
 };

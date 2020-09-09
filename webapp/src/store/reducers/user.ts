@@ -7,6 +7,7 @@ export interface IUserState {
     token: string;
   };
   isAuthenticated: null | boolean;
+  error: string;
 }
 
 const initialState: IUserState = {
@@ -15,6 +16,7 @@ const initialState: IUserState = {
     token: "",
   },
   isAuthenticated: null,
+  error: "",
 };
 
 export default (state: IUserState = initialState, action: UserTypes) => {
@@ -37,7 +39,18 @@ export default (state: IUserState = initialState, action: UserTypes) => {
         },
         isAuthenticated: true,
       };
+    case actionTypes.CREATE_USER_FAILED:
     case actionTypes.LOGIN_USER_FAILED:
+      return {
+        ...initialState,
+        isAuthenticated: false,
+        error: action.payload,
+      };
+    case actionTypes.CLEAR_ERRORS:
+      return {
+        ...state,
+        error: "",
+      };
     case actionTypes.LOGOUT_USER:
       return {
         ...initialState,
