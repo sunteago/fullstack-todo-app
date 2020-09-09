@@ -1,6 +1,7 @@
 import React from "react";
 import { ITodo } from "../../../common/types";
 import TodoItem from "../TodoItem/TodoItem";
+import classes from "./TodoList.module.css";
 
 interface ITodoListProps {
   todos: ITodo[];
@@ -15,7 +16,7 @@ export default function TodoList({
   deleteTodo,
   setCurrentTodo,
 }: ITodoListProps) {
-  return (
+  return todos.length > 0 ? (
     <ul>
       {todos.map((todoItem) => (
         <TodoItem
@@ -27,5 +28,7 @@ export default function TodoList({
         />
       ))}
     </ul>
+  ) : (
+    <p className={classes.NoItems}>No items here yet!</p>
   );
 }
