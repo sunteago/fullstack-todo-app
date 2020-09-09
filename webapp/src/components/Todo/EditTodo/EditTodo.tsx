@@ -12,6 +12,7 @@ import Button from "../../common/Button/Button";
 import FieldError from "../../common/FieldError/FieldError";
 
 import { IState } from "../../../store/reducers";
+import SectionTitle from "../../common/SectionTitle/SectionTitle";
 
 export default function AddTodo(): JSX.Element {
   const [task, setTask] = useState<string>("");
@@ -70,7 +71,7 @@ export default function AddTodo(): JSX.Element {
 
   return (
     <>
-      <h1 className={classes.AddTodoTitle}>Add a new task</h1>
+      <SectionTitle>Add a new task</SectionTitle>
       <form className={classes.Form} onSubmit={onAddTodo}>
         <TextInput
           onChange={onChangeHandler}

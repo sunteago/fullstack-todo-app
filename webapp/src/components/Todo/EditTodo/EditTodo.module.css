@@ -1,9 +1,3 @@
-.AddTodoTitle {
-  margin-bottom: 1.5rem;
-  font-weight: 400;
-  text-align: center;
-}
-
 .Form {
   display: flex;
   margin: 0 auto;

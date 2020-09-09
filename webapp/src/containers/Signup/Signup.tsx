@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { isValidSignup } from "../../common/validation";
 
 import AuthForm from "../AuthForm/AuthForm";
+import SectionTitle from "../../components/common/SectionTitle/SectionTitle";
 
 export default function Signup(): JSX.Element {
   const [values, setValues] = useState({
@@ -31,15 +32,18 @@ export default function Signup(): JSX.Element {
   };
 
   return (
-    <AuthForm
-      setErrors={setErrors}
-      errors={errors}
-      submitText="Sign up"
-      onSubmitHandler={onSubmitHandler}
-      values={values}
-      setValues={setValues}
-      textInputArr={textInputArr}
-    />
+    <>
+      <SectionTitle>Sign up</SectionTitle>
+      <AuthForm
+        setErrors={setErrors}
+        errors={errors}
+        submitText="Sign up"
+        onSubmitHandler={onSubmitHandler}
+        values={values}
+        setValues={setValues}
+        textInputArr={textInputArr}
+      />
+    </>
   );
 }
 
