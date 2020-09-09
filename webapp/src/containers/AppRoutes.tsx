@@ -8,6 +8,7 @@ import Main from "./Main";
 import Login from "./Login/Login";
 import Signup from "./Signup/Signup";
 import Spinner from "../components/common/Spinner/Spinner";
+import About from "./About/About";
 
 export default function AppRoutes() {
   const dispatch = useDispatch();
@@ -26,7 +27,10 @@ export default function AppRoutes() {
         <Signup />
       </Route>
       <Route path="/login">
-        <Login />
+        <About />
+      </Route>
+      <Route path="/about">
+        <About />
       </Route>
       <Route path="/">
         <Main />

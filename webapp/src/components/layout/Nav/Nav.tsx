@@ -57,7 +57,7 @@ export default function Nav() {
                 </a>
               </>
             )}
-            <Link to="/signup">About</Link>
+            <Link to="/about">About</Link>
           </div>
         </nav>
       </div>
