@@ -2,8 +2,46 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createAccount } from "../../store/actions/actions";
 import { useHistory } from "react-router-dom";
+import { isValidSignup } from "../../common/validation";
 
 import AuthForm from "../AuthForm/AuthForm";
+
+export default function Signup(): JSX.Element {
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+    cpassword: "",
+  });
+
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    cpassword: "",
+  });
+
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+
+  const onSubmitHandler = (e: React.FormEvent): void => {
+    e.preventDefault();
+    if (!isValidSignup(values, setErrors)) return;
+    const { email, password } = values;
+    dispatch(createAccount({ email, password }, history));
+  };
+
+  return (
+    <AuthForm
+      setErrors={setErrors}
+      errors={errors}
+      submitText="Sign up"
+      onSubmitHandler={onSubmitHandler}
+      values={values}
+      setValues={setValues}
+      textInputArr={textInputArr}
+    />
+  );
+}
 
 const textInputArr = [
   {
@@ -25,32 +63,3 @@ const textInputArr = [
     label: "Confirm Password",
   },
 ];
-
-export default function Signup(): JSX.Element {
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-    cpassword: "",
-  });
-
-  const history = useHistory();
-
-  const dispatch = useDispatch();
-
-  const onSubmitHandler = (e: React.FormEvent): void => {
-    e.preventDefault();
-    const { email, password } = values;
-    if (email.trim() === "" || password.trim() === "") return;
-    dispatch(createAccount({ email, password }, history));
-  };
-
-  return (
-    <AuthForm
-      submitText="Sign up"
-      onSubmitHandler={onSubmitHandler}
-      values={values}
-      setValues={setValues}
-      textInputArr={textInputArr}
-    />
-  );
-}
