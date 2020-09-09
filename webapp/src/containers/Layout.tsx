@@ -5,7 +5,7 @@ import Header from "../components/layout/Header/Header";
 import Nav from "../components/layout/Nav/Nav";
 
 interface IPageContent {
-  children: JSX.Element[];
+  children: JSX.Element;
 }
 
 export default function Layout({ children }: IPageContent): JSX.Element {

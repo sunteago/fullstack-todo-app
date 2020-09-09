@@ -8,11 +8,16 @@ interface ITextInput {
   placeholder: string;
   onChange: React.ChangeEventHandler;
   value: string;
-  onClear: React.MouseEventHandler;
+  onClear: (e: React.MouseEvent, name?: string) => void;
+  id?: string;
+  name?: string;
 }
 
 export default React.forwardRef(
-  ({ type, placeholder, onChange, value, onClear }: ITextInput, ref: any) => (
+  (
+    { type, placeholder, onChange, value, onClear, id, name }: ITextInput,
+    ref: any
+  ) => (
     <div className={classes.InputContainer}>
       <input
         className={classes.TextInput}
@@ -21,9 +26,11 @@ export default React.forwardRef(
         onChange={onChange}
         value={value}
         ref={ref}
+        id={id}
+        name={name}
       />
       <FontAwesomeIcon
-        onClick={onClear}
+        onClick={(e) => onClear(e, name)}
         className={classes.TimesIcon}
         icon={faTimes}
       />

@@ -8,6 +8,11 @@
   top: 0;
   z-index: 150;
   cursor: pointer;
+  transition: background 0.2s ease-in;
+}
+
+.MobileNav.Toggled {
+  background: var(--secondary);
 }
 
 .Toggle {

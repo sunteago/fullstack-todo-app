@@ -1,14 +1,16 @@
 import React from "react";
-import Main from "./containers/Main";
-import EditTodo from "./components/Todo/EditTodo/EditTodo";
+import { HashRouter as Router } from "react-router-dom";
+
 import Layout from "./containers/Layout";
+import AppRoutes from "./containers/AppRoutes";
 
 function App(): JSX.Element {
   return (
-    <Layout>
-      <EditTodo />
-      <Main />
-    </Layout>
+    <Router>
+      <Layout>
+        <AppRoutes />
+      </Layout>
+    </Router>
   );
 }
 

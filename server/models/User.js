@@ -2,19 +2,15 @@ const Sequelize = require("sequelize");
 
 const sequelize = require("../config/db");
 
-const Todo = sequelize.define("todo", {
+const User = sequelize.define("user", {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true,
   },
-  uuid: Sequelize.STRING,
-  task: Sequelize.STRING,
-  done: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
-  },
+  email: Sequelize.STRING,
+  password: Sequelize.STRING,
 });
 
-module.exports = Todo;
+module.exports = User;

@@ -3,7 +3,11 @@ const cors = require("cors");
 
 const sequelize = require("./config/db");
 
+const Todo = require("./models/Todo");
+const User = require("./models/User");
+
 const todosRoutes = require("./routes/todos");
+const userRoutes = require("./routes/user");
 
 const PORT = 4000;
 
@@ -14,6 +18,10 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/todos", todosRoutes);
+
+app.use("/user", userRoutes);
+
+Todo.belongsTo(User);
 
 sequelize
   .sync()

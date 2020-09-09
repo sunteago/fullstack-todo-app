@@ -47,6 +47,8 @@ export default (state: ITodosState = initialState, action: TodosTypes) => {
           return todoItem;
         }),
       };
+    case actionTypes.LOGOUT_USER:
+      return initialState;
     case actionTypes.DELETE_TODO_ITEM_FAILED:
     case actionTypes.DELETE_TODO_ITEM_START:
     case actionTypes.CREATE_TODO_ITEM_START:
