@@ -46,6 +46,11 @@ export default (state: IUserState = initialState, action: UserTypes) => {
         isAuthenticated: false,
         error: action.payload,
       };
+    case actionTypes.CLEAR_ERRORS:
+      return {
+        ...state,
+        error: "",
+      };
     case actionTypes.LOGOUT_USER:
       return {
         ...initialState,

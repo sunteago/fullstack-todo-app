@@ -10,6 +10,8 @@ export const LOGIN_USER_FAILED = "LOGIN_USER_FAILED";
 
 export const LOGOUT_USER = "LOGOUT_USER";
 
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
 interface ICreateUserStart {
   type: typeof CREATE_USER_START;
 }
@@ -45,6 +47,10 @@ export interface ILogoutUser {
   type: typeof LOGOUT_USER;
 }
 
+export interface IClearErrors {
+  type: typeof CLEAR_ERRORS;
+}
+
 export type UserTypes =
   | ICreateUserStart
   | ICreateUserSuccess
@@ -52,4 +58,5 @@ export type UserTypes =
   | ILoginUserStart
   | ILoginUserSuccess
   | ILoginUserFailed
-  | ILogoutUser;
+  | ILogoutUser
+  | IClearErrors;

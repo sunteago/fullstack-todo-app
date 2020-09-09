@@ -54,6 +54,7 @@ export const createAccount = (newAcc: Credentials, history: any): AppThunk => (
         type: actionTypes.CREATE_USER_FAILED,
         payload: err.message,
       });
+      dispatch(clearErrors());
     });
 };
 
@@ -91,6 +92,7 @@ export const logIn = (newAcc: Credentials, history: any): AppThunk => (
         type: actionTypes.LOGIN_USER_FAILED,
         payload: err.message,
       });
+      dispatch(clearErrors());
     });
 };
 
@@ -134,5 +136,14 @@ export const checkIsAuth = (history: any): AppThunk => (dispatch) => {
     .catch((err: IErrMsg) => {
       localStorage.removeItem("ens_token");
       dispatch({ type: actionTypes.LOGIN_USER_FAILED, payload: err.message });
+      dispatch(clearErrors());
     });
+};
+
+export const clearErrors = (): AppThunk => (dispatch) => {
+  setTimeout(() => {
+    dispatch({
+      type: actionTypes.CLEAR_ERRORS,
+    });
+  }, 3000);
 };
