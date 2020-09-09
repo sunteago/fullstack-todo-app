@@ -39,10 +39,9 @@ export default function AuthForm(props: IAuthFormProps): JSX.Element {
     <form onSubmit={onSubmitHandler} className={classes.Form}>
       {textInputArr.map((input) => {
         return (
-          <>
+          <React.Fragment key={input.name}>
             <label htmlFor={input.name}>{input.label}</label>
             <TextInput
-              key={input.name}
               onChange={onChangeHandler}
               onClear={onClearHandler}
               value={values[input.name]}
@@ -51,7 +50,7 @@ export default function AuthForm(props: IAuthFormProps): JSX.Element {
               name={input.name}
               id={input.name}
             />
-          </>
+          </React.Fragment>
         );
       })}
       <Button type="submit" value={submitText} />

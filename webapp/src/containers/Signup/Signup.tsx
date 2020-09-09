@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createAccount } from "../../store/actions/actions";
+import { useHistory } from "react-router-dom";
 
 import AuthForm from "../AuthForm/AuthForm";
 
@@ -32,13 +33,15 @@ export default function Signup(): JSX.Element {
     cpassword: "",
   });
 
+  const history = useHistory();
+
   const dispatch = useDispatch();
 
   const onSubmitHandler = (e: React.FormEvent): void => {
     e.preventDefault();
     const { email, password } = values;
     if (email.trim() === "" || password.trim() === "") return;
-    dispatch(createAccount({ email, password }));
+    dispatch(createAccount({ email, password }, history));
   };
 
   return (

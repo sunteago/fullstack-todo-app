@@ -23,12 +23,15 @@ interface ICreateTodoItem {
   data: ITodo;
 }
 
-export const createTodoItem = (task: string): AppThunk => (dispatch) => {
+export const createTodoItem = (task: string, token: string): AppThunk => (
+  dispatch
+) => {
   dispatch({ type: actionTypes.CREATE_TODO_ITEM_START });
   fetch(`${apiConfig.baseUrl}/todos/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ task }),
   })
@@ -54,9 +57,15 @@ export const createTodoItem = (task: string): AppThunk => (dispatch) => {
     );
 };
 
-export const getTodos = (): AppThunk => (dispatch) => {
+export const getInitialTodos = (token: string, history: any): AppThunk => (
+  dispatch
+) => {
   dispatch({ type: actionTypes.GET_TODOS_START });
-  fetch(`${apiConfig.baseUrl}/todos`)
+  fetch(`${apiConfig.baseUrl}/todos`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
     .then((res) => {
       if (!res.ok) {
         throw new Error("There was a problem");
@@ -69,6 +78,7 @@ export const getTodos = (): AppThunk => (dispatch) => {
         type: actionTypes.GET_TODOS_SUCCESS,
         payload: todosReq.data,
       });
+      history.push("/");
     })
     .catch((err) =>
       dispatch({

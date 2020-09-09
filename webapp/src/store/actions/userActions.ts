@@ -1,5 +1,6 @@
 import apiConfig from "../../config/api";
 import * as actionTypes from "./actionTypes";
+import { getInitialTodos } from "./todosActions";
 
 import { Credentials } from "../../common/types";
 import { Action } from "redux";
@@ -19,7 +20,9 @@ export interface IAuthResponse {
   email: string;
 }
 
-export const createAccount = (newAcc: Credentials): AppThunk => (dispatch) => {
+export const createAccount = (newAcc: Credentials, history: any): AppThunk => (
+  dispatch
+) => {
   dispatch({ type: actionTypes.CREATE_USER_START });
   fetch(`${apiConfig.baseUrl}/user/signup`, {
     method: "POST",
@@ -41,6 +44,7 @@ export const createAccount = (newAcc: Credentials): AppThunk => (dispatch) => {
         payload: credentials,
       });
       localStorage.setItem("ens_token", credentials.token);
+      dispatch(getInitialTodos(credentials.token, history));
     })
     .catch((err) => {
       dispatch({
@@ -50,7 +54,9 @@ export const createAccount = (newAcc: Credentials): AppThunk => (dispatch) => {
     });
 };
 
-export const logIn = (newAcc: Credentials): AppThunk => (dispatch) => {
+export const logIn = (newAcc: Credentials, history: any): AppThunk => (
+  dispatch
+) => {
   dispatch({ type: actionTypes.LOGIN_USER_START });
   fetch(`${apiConfig.baseUrl}/user/login`, {
     method: "POST",
@@ -72,6 +78,7 @@ export const logIn = (newAcc: Credentials): AppThunk => (dispatch) => {
         payload: credentials,
       });
       localStorage.setItem("ens_token", credentials.token);
+      dispatch(getInitialTodos(credentials.token, history));
     })
     .catch((err) => {
       dispatch({
@@ -84,8 +91,33 @@ export const logIn = (newAcc: Credentials): AppThunk => (dispatch) => {
 export const checkIsAuth = (history: any): AppThunk => (dispatch) => {
   const token = localStorage.getItem("ens_token");
   if (!token) {
-    return dispatch({ type: actionTypes.LOGOUT_USER_SUCCESS });
+    dispatch({ type: actionTypes.LOGOUT_USER_SUCCESS });
+    return history.push("/login");
   }
-  history.push("/login");
-  dispatch({ type: actionTypes.LOGOUT_USER_SUCCESS });
+  dispatch(getInitialTodos(token, history));
+  fetch(`${apiConfig.baseUrl}/user/auth`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("There was a problem");
+      }
+      return res;
+    })
+    .then((res) => res.json())
+    .then((res: { msg: string; email: string }) => {
+      dispatch({
+        type: actionTypes.LOGIN_USER_SUCCESS,
+        payload: {
+          email: res.email,
+          token,
+        },
+      });
+    })
+    .catch((err) => {
+      dispatch({ type: actionTypes.LOGIN_USER_FAILED });
+    });
 };

@@ -10,7 +10,7 @@ export default function Todo(): JSX.Element {
   const todos = useSelector((state: IState) => state.todos.todos);
 
   useEffect(() => {
-    dispatch(actions.getTodos());
+    // dispatch(actions.getTodos());
   }, [dispatch]);
 
   return (

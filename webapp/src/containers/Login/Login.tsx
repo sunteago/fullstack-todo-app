@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../store/actions/actions";
+import { useHistory } from "react-router-dom";
 
 import AuthForm from "../AuthForm/AuthForm";
 
@@ -26,13 +27,15 @@ export default function Login(): JSX.Element {
     cpassword: "",
   });
 
+  const history = useHistory();
+
   const dispatch = useDispatch();
 
   const onSubmitHandler = (e: React.FormEvent): void => {
     e.preventDefault();
     const { email, password } = values;
     if (email.trim() === "" || password.trim() === "") return;
-    dispatch(logIn({ email, password }));
+    dispatch(logIn({ email, password }, history));
   };
 
   return (

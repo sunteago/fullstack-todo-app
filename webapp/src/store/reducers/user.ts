@@ -27,6 +27,16 @@ export default (state: IUserState = initialState, action: UserTypes) => {
           token: action.payload.token,
         },
       };
+    case actionTypes.LOGIN_USER_SUCCESS:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          email: action.payload.email,
+          token: action.payload.token,
+        },
+        isAuthenticated: true,
+      };
     case actionTypes.LOGOUT_USER_SUCCESS:
       return {
         ...initialState,

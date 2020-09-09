@@ -31,6 +31,10 @@ interface ILoginUserStart {
 
 interface ILoginUserSuccess {
   type: typeof LOGIN_USER_SUCCESS;
+  payload: {
+    email: string;
+    token: string;
+  };
 }
 
 interface ILoginUserFailed {

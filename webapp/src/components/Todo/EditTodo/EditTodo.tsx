@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 import classes from "./EditTodo.module.css";
-
 import {
   createTodoItem,
   updateTodoItem,
   setCurrentTodo,
 } from "../../../store/actions/actions";
 import { useSelector, useDispatch } from "react-redux";
-import { IState } from "../../../store/reducers";
+
 import TextInput from "../../common/TextInput/TextInput";
 import Button from "../../common/Button/Button";
+
+import { IState } from "../../../store/reducers";
 
 export default function AddTodo(): JSX.Element {
   const [task, setTask] = useState("");
 
   const currentTodo = useSelector((state: IState) => state.todos.currentTodo);
+  const { token } = useSelector((state: IState) => state.user.currentUser);
 
   const inputRef = React.createRef<HTMLInputElement>();
   const dispatch = useDispatch();
@@ -38,7 +40,7 @@ export default function AddTodo(): JSX.Element {
     if (currentTodo) {
       dispatch(updateTodoItem(currentTodo.uuid, task, currentTodo.done));
     } else {
-      dispatch(createTodoItem(task));
+      dispatch(createTodoItem(task, token));
     }
     setTask("");
   };
