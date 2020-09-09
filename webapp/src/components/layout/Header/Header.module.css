@@ -1,0 +1,29 @@
+.Header {
+  padding: 1rem 1rem 2rem 1rem;
+  margin-bottom: 2rem;
+  border-bottom: calc(0.5vw + 0.5rem) dashed var(--primary);
+}
+
+.Header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+}
+
+.LoggedAs {
+  text-align: center;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.LoggedAs span {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+@media (min-width: 576px) {
+  .Header {
+    text-align: center;
+  }
+}

@@ -1,0 +1,48 @@
+.TodosContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.TodosContainer:last-child {
+  margin-bottom: 3rem;
+}
+
+.Title {
+  text-align: center;
+  margin: 2rem auto;
+  padding: 0.3rem 1.5rem;
+  background: var(--primary);
+  color: var(--secondary);
+  font-weight: 100;
+  font-size: 2rem;
+}
+
+.TodoList {
+  list-style: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.TodoList li {
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.Delete,
+.Done,
+.NotDone {
+  font-size: 2rem;
+  display: inline-block;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+.Delete {
+  color: #a0293f;
+}
+.Done {
+  color: green;
+}

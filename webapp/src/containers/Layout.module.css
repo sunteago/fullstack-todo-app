@@ -1,0 +1,29 @@
+.MainLayout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.PageContainer {
+  padding: 1rem;
+  flex: 1;
+  background: var(--secondary);
+
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.ErrorContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.ErrorMsg {
+  color: #fff;
+  margin: 1rem auto;
+  font-size: 1.5rem;
+  text-align: center;
+  background: rgb(236, 55, 55);
+  padding: 1rem;
+}

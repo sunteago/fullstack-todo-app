@@ -1,8 +1,16 @@
-import React from 'react';
+import React from "react";
+import { HashRouter as Router } from "react-router-dom";
 
-function App() {
+import Layout from "./containers/Layout";
+import AppRoutes from "./containers/AppRoutes";
+
+function App(): JSX.Element {
   return (
-   <div>Ensolvers</div>
+    <Router>
+      <Layout>
+        <AppRoutes />
+      </Layout>
+    </Router>
   );
 }
 

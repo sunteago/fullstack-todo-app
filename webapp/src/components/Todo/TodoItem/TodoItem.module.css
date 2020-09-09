@@ -1,0 +1,58 @@
+.TodoItem {
+  list-style: none;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  cursor: pointer;
+}
+
+.Task {
+  font-family: var(--font-secondary);
+  font-size: 2.25rem;
+  opacity: 0.7;
+  transition: 0.2s opacity ease-in;
+}
+
+.Task:hover,
+.Task:focus {
+  opacity: 1;
+}
+
+.Done {
+  text-decoration: line-through;
+}
+
+.DoneTodo {
+  background: var(--primary);
+  padding: 0.3rem;
+}
+
+.DoneTodo svg {
+  width: 150%;
+}
+
+.Buttons {
+  display: flex;
+}
+
+.EditTodo,
+.DeleteTodo {
+  margin: 0 0.5rem;
+  opacity: 0.7;
+  display: block;
+  transition: 0.2s opacity ease-in;
+  padding: 0.5rem 1rem;
+}
+
+.DeleteTodo {
+  color: red;
+}
+
+.EditTodo:hover,
+.EditTodo:focus,
+.DeleteTodo:hover,
+.DeleteTodo:focus {
+  opacity: 1;
+}

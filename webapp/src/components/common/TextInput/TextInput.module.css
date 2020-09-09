@@ -1,0 +1,30 @@
+.InputContainer {
+  flex: 1 1 60%;
+  margin-right: 1rem;
+  position: relative;
+}
+
+.TextInput {
+  border-radius: var(--radius);
+  border: none;
+  font-size: 1.325rem;
+  width: 100%;
+  padding: 0.7rem;
+}
+
+.TimesIcon {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 1rem;
+  color: red;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease-in;
+}
+
+.TimesIcon:hover,
+.TimesIcon:focus {
+  opacity: 1;
+}
