@@ -7,6 +7,9 @@ exports.getTodos = async (req, res, next) => {
       attributes: ["uuid", "task", "done", "updatedAt"],
       limit: 10,
       order: [["createdAt", "DESC"]],
+      where: {
+        userId: req.user.userId,
+      },
     });
     res.status(200).json({ msg: "Succeed", data: todos });
   } catch (err) {
@@ -17,7 +20,7 @@ exports.getTodos = async (req, res, next) => {
 
 exports.createTodoItem = async (req, res, next) => {
   const task = req.body.task;
-  const { userId, email } = req.user;
+  const { userId } = req.user;
   if (!task) {
     return res.status(400).json({ msg: "Need a task to proceed" });
   }
@@ -34,6 +37,7 @@ exports.updateTodoItem = async (req, res, next) => {
   const todoId = req.params.todoId;
   const newTask = req.body.task;
   const done = req.body.done;
+  const userId = req.user.userId;
 
   if (!todoId) {
     return res.status(400).json({ msg: "Need a todo to proceed" });
@@ -50,6 +54,10 @@ exports.updateTodoItem = async (req, res, next) => {
         uuid: todoId,
       },
     });
+
+    if (todo.userId !== userId) {
+      return res.status(403).json({ msg: "Not allowed" });
+    }
 
     todo.task = newTask;
     todo.done = done;
@@ -72,6 +80,10 @@ exports.deleteTodoItem = async (req, res, next) => {
         uuid: todoId,
       },
     });
+
+    if (todo.userId !== userId) {
+      return res.status(403).json({ msg: "Not allowed" });
+    }
 
     await todo.destroy();
     return res.status(200).json({ msg: "Task deleted successfully" });
