@@ -47,6 +47,7 @@ export const createAccount = (newAcc: Credentials, history: any): AppThunk => (
       dispatch(getInitialTodos(credentials.token, history));
     })
     .catch((err) => {
+      localStorage.removeItem("ens_token");
       dispatch({
         type: actionTypes.CREATE_USER_FAILED,
         payload: err,
@@ -81,6 +82,7 @@ export const logIn = (newAcc: Credentials, history: any): AppThunk => (
       dispatch(getInitialTodos(credentials.token, history));
     })
     .catch((err) => {
+      localStorage.removeItem("ens_token");
       dispatch({
         type: actionTypes.LOGIN_USER_FAILED,
         payload: err,
@@ -88,10 +90,17 @@ export const logIn = (newAcc: Credentials, history: any): AppThunk => (
     });
 };
 
+export const logOut = (history: any) => {
+  history.push("/login");
+  return {
+    type: actionTypes.LOGOUT_USER,
+  };
+};
+
 export const checkIsAuth = (history: any): AppThunk => (dispatch) => {
   const token = localStorage.getItem("ens_token");
   if (!token) {
-    dispatch({ type: actionTypes.LOGOUT_USER_SUCCESS });
+    dispatch({ type: actionTypes.LOGOUT_USER });
     return history.push("/login");
   }
   dispatch(getInitialTodos(token, history));
@@ -118,6 +127,7 @@ export const checkIsAuth = (history: any): AppThunk => (dispatch) => {
       });
     })
     .catch((err) => {
+      localStorage.removeItem("ens_token");
       dispatch({ type: actionTypes.LOGIN_USER_FAILED });
     });
 };

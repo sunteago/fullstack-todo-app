@@ -1,4 +1,5 @@
 import { ITodo } from "../../common/types";
+import { ILogoutUser } from "./userTypes";
 
 export const CREATE_TODO_ITEM_START = "CREATE_TODO_ITEM_START";
 export const CREATE_TODO_ITEM_SUCCESS = "CREATE_TODO_ITEM_SUCCESS";
@@ -88,4 +89,5 @@ export type TodosTypes =
   | IUpdateTodoItemStart
   | IUpdateTodoItemSuccess
   | IUpdateTodoItemFailed
-  | ISetCurrentTodo;
+  | ISetCurrentTodo
+  | ILogoutUser;

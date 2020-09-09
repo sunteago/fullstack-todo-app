@@ -6,11 +6,11 @@ import AppRoutes from "./containers/AppRoutes";
 
 function App(): JSX.Element {
   return (
-    <Layout>
-      <Router>
+    <Router>
+      <Layout>
         <AppRoutes />
-      </Router>
-    </Layout>
+      </Layout>
+    </Router>
   );
 }
 

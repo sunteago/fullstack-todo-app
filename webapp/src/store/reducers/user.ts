@@ -37,7 +37,8 @@ export default (state: IUserState = initialState, action: UserTypes) => {
         },
         isAuthenticated: true,
       };
-    case actionTypes.LOGOUT_USER_SUCCESS:
+    case actionTypes.LOGIN_USER_FAILED:
+    case actionTypes.LOGOUT_USER:
       return {
         ...initialState,
         isAuthenticated: false,
