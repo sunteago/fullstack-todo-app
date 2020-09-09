@@ -92,6 +92,7 @@ export const logIn = (newAcc: Credentials, history: any): AppThunk => (
 
 export const logOut = (history: any) => {
   history.push("/login");
+  localStorage.removeItem("ens_token");
   return {
     type: actionTypes.LOGOUT_USER,
   };
