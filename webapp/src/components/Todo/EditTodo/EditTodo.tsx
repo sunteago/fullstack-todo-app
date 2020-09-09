@@ -38,7 +38,7 @@ export default function AddTodo(): JSX.Element {
     e.preventDefault();
     if (task.trim() === "") return;
     if (currentTodo) {
-      dispatch(updateTodoItem(currentTodo.uuid, task, currentTodo.done));
+      dispatch(updateTodoItem(currentTodo.uuid, task, currentTodo.done, token));
     } else {
       dispatch(createTodoItem(task, token));
     }

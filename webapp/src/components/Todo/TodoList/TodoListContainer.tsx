@@ -1,12 +1,19 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ITodo } from "../../../common/types";
 import classes from "./TodoListContainer.module.css";
 import TodoList from "./TodoList";
-import * as actions from "../../../store/actions/actions";
+import {
+  deleteTodoItem,
+  updateTodoItem,
+  setCurrentTodo,
+} from "../../../store/actions/actions";
+import { IState } from "../../../store/reducers";
 
 export default function TodoListContainer({ todos }: { todos: ITodo[] }) {
   const dispatch = useDispatch();
+
+  const { token } = useSelector((state: IState) => state.user.currentUser);
 
   const doneTodos: ITodo[] = [];
   const notDoneTodos: ITodo[] = [];
@@ -17,15 +24,15 @@ export default function TodoListContainer({ todos }: { todos: ITodo[] }) {
 
   const toggleTodo = (todo: ITodo): void => {
     const { uuid, task, done } = todo;
-    dispatch(actions.updateTodoItem(uuid, task, !done));
+    dispatch(updateTodoItem(uuid, task, !done, token));
   };
 
   const deleteTodo = (uid: string): void => {
-    dispatch(actions.deleteTodoItem(uid));
+    dispatch(deleteTodoItem(uid, token));
   };
 
   const setCurrentTodo = (todo: ITodo): void => {
-    dispatch(actions.setCurrentTodo(todo));
+    dispatch(setCurrentTodo(todo));
   };
 
   return (

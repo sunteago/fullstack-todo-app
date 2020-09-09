@@ -90,13 +90,15 @@ export const getInitialTodos = (token: string, history: any): AppThunk => (
 export const updateTodoItem = (
   uuid: string,
   task: string,
-  done: boolean
+  done: boolean,
+  token: string
 ): AppThunk => (dispatch) => {
   dispatch({ type: actionTypes.UPDATE_TODO_ITEM_START });
   fetch(`${apiConfig.baseUrl}/todos/${uuid}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       task,
@@ -128,9 +130,14 @@ export const updateTodoItem = (
     );
 };
 
-export const deleteTodoItem = (taskUid: string): AppThunk => (dispatch) => {
+export const deleteTodoItem = (taskUid: string, token: string): AppThunk => (
+  dispatch
+) => {
   dispatch({ type: actionTypes.DELETE_TODO_ITEM_START });
   fetch(`${apiConfig.baseUrl}/todos/${taskUid}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
     method: "DELETE",
   })
     .then((res) => {
