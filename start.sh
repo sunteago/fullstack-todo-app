@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Creating test data"
+node ./server/install.js
 echo "Installing node modules for server"
 cd server
 npm install

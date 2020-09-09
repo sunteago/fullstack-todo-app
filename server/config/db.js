@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 require("dotenv").config({ path: "./.env" });
 
 const sequelize = new Sequelize(
-  "ensolvers",
+  "todo_ensolvers",
   process.env.DB_USER,
   process.env.DB_PASS,
   {
